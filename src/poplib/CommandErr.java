@@ -1,11 +1,13 @@
 package poplib;
 
 public class CommandErr extends Command {
+
+	public static final String COMMAND_NAME = "ERR";
 	
 	private String message;
 
 	public CommandErr() {
-		super("-Err");
+		super(COMMAND_NAME);
 	}
 
 	@Override

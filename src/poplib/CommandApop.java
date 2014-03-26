@@ -2,11 +2,13 @@ package poplib;
 
 public class CommandApop extends Command {
 
+	public static final String COMMAND_NAME = "APOP";
+	
     private String mailbox;
     private String md5;
 
     public CommandApop(String mailbox, String md5) {
-        super("APOP");
+        super(COMMAND_NAME);
         this.mailbox = mailbox;
         this.md5 = md5;
     }
