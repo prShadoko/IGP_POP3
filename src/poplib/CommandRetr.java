@@ -1,11 +1,13 @@
 package poplib;
 
 public class CommandRetr extends Command {
-	
+
+    public static final String COMMAND_NAME = "RETR";
+
 	private int idMessage;
 
 	public CommandRetr(int idMessage) {
-		super("RETR");
+		super(COMMAND_NAME);
 		this.idMessage = idMessage; 
 	}
 

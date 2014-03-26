@@ -1,8 +1,10 @@
 package poplib;
 
 public class CommandStat extends Command {
-	
+
+    public static final String COMMAND_NAME = "STAT";
+
 	public CommandStat() {
-		super("STAT");
+		super(COMMAND_NAME);
 	}
 }

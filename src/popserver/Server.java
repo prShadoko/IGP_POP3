@@ -1,17 +1,16 @@
 package popserver;
 
+import poplib.Protocol;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 
 
 public class Server {
 
-    public static int LISTENING_PORT = 110;
-    public static int SESSION_COUNT = 5;
-
-    public Server() {
+    public Server(int sessionCount) {
         try {
-            ServerSocket s = new ServerSocket(LISTENING_PORT, SESSION_COUNT);
+            ServerSocket s = new ServerSocket(Protocol.LISTENING_PORT, sessionCount);
             new Session(s.accept());
         } catch(IOException e) {
             // TODO
@@ -21,6 +20,6 @@ public class Server {
 
 
     public static void main(String[] args) {
-        new Server();
+        new Server(5);
     }
 }

@@ -2,7 +2,9 @@ package poplib;
 
 public class CommandQuit extends Command {
 
+    public static final String COMMAND_NAME = "QUIT";
+
 	public CommandQuit() {
-		super("QUIT");
+		super(COMMAND_NAME);
 	}
 }
