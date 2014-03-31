@@ -1,4 +1,4 @@
-package poplib;
+package poplib.state;
 
 public interface State {
 

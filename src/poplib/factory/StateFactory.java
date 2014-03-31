@@ -1,6 +1,6 @@
 package poplib.factory;
 
-import poplib.State;
+import poplib.state.State;
 
 public interface StateFactory {
 	
