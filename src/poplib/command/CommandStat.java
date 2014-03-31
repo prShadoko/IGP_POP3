@@ -1,4 +1,4 @@
-package poplib;
+package poplib.command;
 
 public class CommandStat extends Command {
 

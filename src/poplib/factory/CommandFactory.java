@@ -1,12 +1,12 @@
 package poplib.factory;
 
-import poplib.Command;
-import poplib.CommandApop;
-import poplib.CommandErr;
-import poplib.CommandOk;
-import poplib.CommandQuit;
-import poplib.CommandRetr;
-import poplib.CommandStat;
+import poplib.command.Command;
+import poplib.command.CommandApop;
+import poplib.command.CommandErr;
+import poplib.command.CommandOk;
+import poplib.command.CommandQuit;
+import poplib.command.CommandRetr;
+import poplib.command.CommandStat;
 
 public class CommandFactory {
 
