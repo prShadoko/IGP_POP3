@@ -1,0 +1,16 @@
+bin/
+
+###########
+# Eclipse #
+###########
+.classpath
+.project
+
+
+#################
+# IntelliJ IDEA #
+#################
+.idea
+.settings
+*.eml
+*.iml
