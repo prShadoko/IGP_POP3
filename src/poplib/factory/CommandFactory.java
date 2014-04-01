@@ -11,6 +11,7 @@ import poplib.command.CommandStat;
 public class CommandFactory {
 
 	public Command parse(String cmd) {
+		System.out.println(cmd);
 		Command command = null;
 		String commandName;
 		String commandArg;
@@ -18,12 +19,12 @@ public class CommandFactory {
 		if (null != cmd) {
 
 			int firstSpacePosition = cmd.indexOf(' ');
-			if (-1 != firstSpacePosition) {
+			if (-1 == firstSpacePosition) {
 				commandName = cmd;
 				commandArg = null;
 			} else {
 				commandName = cmd.substring(0, firstSpacePosition);
-				commandArg = cmd.substring(firstSpacePosition);
+				commandArg = cmd.substring(firstSpacePosition+1);
 			}
 
 			if (CommandApop.COMMAND_NAME.equals(commandName)) {

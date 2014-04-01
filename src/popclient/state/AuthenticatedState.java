@@ -10,9 +10,11 @@ import poplib.state.AbstractState;
 public class AuthenticatedState extends AbstractState {
 
 	private Command commandToSend;
+	private boolean quit;
 	
 	public AuthenticatedState(DeliveryService deliveryService) {
 		super(deliveryService);
+		quit = false;
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class AuthenticatedState extends AbstractState {
 				
 			}
 			else if("0".equals(response)) {
-				commandToSend = new CommandQuit();
+				quit = true;
 			}
 		}
 	}
@@ -48,5 +50,9 @@ public class AuthenticatedState extends AbstractState {
 	
 	public Command getCommandToSend() {
 		return commandToSend;
+	}
+	
+	public boolean quit() {
+		return quit;
 	}
 }
