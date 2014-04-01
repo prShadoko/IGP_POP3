@@ -1,10 +1,8 @@
 package popserver.state;
 
-import poplib.command.CommandOk;
-import poplib.service.DeliveryService;
-import poplib.state.AbstractState;
-
-import java.io.IOException;
+import src.poplib.command.CommandOk;
+import src.poplib.service.DeliveryService;
+import src.poplib.state.AbstractState;
 
 public class AuthorizationState extends AbstractState {
 
