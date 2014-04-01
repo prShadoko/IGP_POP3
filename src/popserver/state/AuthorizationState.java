@@ -16,11 +16,10 @@ public class AuthorizationState extends AbstractState {
 
     @Override
     public void run() {
-
         try {
             CommandOk command = new CommandOk("server ready");
+            System.out.println("Command: " + command.toString());
             deliveryService.send(command);
-            System.out.println("Sent: " + command.toString());
         } catch(IOException e) {
             //TODO
             e.printStackTrace();

@@ -10,31 +10,25 @@ import java.net.Socket;
 public class DeliveryServiceImpl implements DeliveryService {
 
 	private Socket socket;
-	private BufferedReader in;
-	private OutputStream out;
+	private BufferedReader reader;
+	private OutputStreamWriter writer;
 
 	protected CommandFactory commandFactory = new CommandFactory();
 
 	public DeliveryServiceImpl(Socket socket) throws IOException {
 		this.socket = socket;
-
-		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		out = socket.getOutputStream();
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        writer = new OutputStreamWriter(socket.getOutputStream());
 	}
 
 	@Override
 	public void send(Command command) throws IOException {
-		OutputStream oStream = socket.getOutputStream();
-		OutputStreamWriter writer = new OutputStreamWriter(oStream);
 		writer.write(command.toString());
 		writer.flush();
 	}
 
 	@Override
 	public Command receive() throws IOException {
-		InputStream iStream = socket.getInputStream();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(iStream));
 		return commandFactory.parse(reader.readLine());
 	}
-
 }
