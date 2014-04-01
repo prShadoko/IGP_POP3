@@ -1,9 +1,9 @@
 package popserver;
 
-import java.io.IOException;
-import java.net.Socket;
 
 import poplib.factory.StateFactory;
+import popserver.factory.ServerStateFactory;
+import java.net.Socket;
 
 public class Session extends Thread {
 
@@ -14,13 +14,8 @@ public class Session extends Thread {
     public Session(Socket s) {
         System.out.println("Client connected");
         this.socket = s;
-//        this.stateFactory =
-        try {
-            this.state = new AuthorizationState(socket);
-        } catch(IOException e) {
-            //TODO
-            e.printStackTrace();
-        }
+        this.stateFactory = new ServerStateFactory();
+        this.state = stateFactory.nextState(null);
     }
 
     @Override
