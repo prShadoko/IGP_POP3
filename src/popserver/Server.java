@@ -17,9 +17,10 @@ public class Server {
     public void run() {
         try {
             ServerSocket s = new ServerSocket(Protocol.LISTENING_PORT, sessionCount);
-            new Session(s.accept()).start();
+            while(true) {
+                new Session(s.accept()).start();
+            }
         } catch(IOException e) {
-            // TODO
             e.printStackTrace();
         }
     }
