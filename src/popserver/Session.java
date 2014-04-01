@@ -13,6 +13,7 @@ public class Session extends Thread {
     private poplib.state.State state;
 
     public Session(Socket s) {
+        System.out.println("Client connected");
         this.socket = s;
 //        this.stateFactory =
         try {

@@ -14,6 +14,8 @@ public class AuthorizationState extends AbstractState {
 
     @Override
     public void run() {
-        deliveryService.send(new CommandOk("server ready"));
+        CommandOk command = new CommandOk("server ready");
+        deliveryService.send(command);
+        System.out.println("Sent: " + command.toString());
     }
 }
