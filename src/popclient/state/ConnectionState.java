@@ -27,7 +27,7 @@ public class ConnectionState extends AbstractState {
 		System.out.println("Demande de connexion n°" + (tryCount+1));
 		Socket socket;
 		try {
-			socket = new Socket(InetAddress.getByName("192.168.43.130"), Protocol.LISTENING_PORT);
+			socket = new Socket(InetAddress.getByName("192.168.43.8"), Protocol.LISTENING_PORT);
 //			socket = new Socket(InetAddress.getByName("accesbv.univ-lyon1.fr"), 995);
 			deliveryService = new DeliveryServiceImpl(socket);
 

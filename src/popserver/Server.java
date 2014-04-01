@@ -1,5 +1,7 @@
 package popserver;
 
+import poplib.Protocol;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 
