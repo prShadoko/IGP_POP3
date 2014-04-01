@@ -2,8 +2,10 @@ package popserver;
 
 
 import poplib.factory.StateFactory;
+import poplib.service.impl.DeliveryServiceImpl;
 import popserver.factory.ServerStateFactory;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public class Session extends Thread {
@@ -15,14 +17,20 @@ public class Session extends Thread {
     public Session(Socket s) {
         System.out.println("Client connected");
         this.socket = s;
-        this.stateFactory = new ServerStateFactory();
-        this.state = stateFactory.nextState(null);
+        try {
+            this.stateFactory = new ServerStateFactory(new DeliveryServiceImpl(socket));
+            this.state = stateFactory.nextState(null);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void run() {
         super.run();
-        this.state.run();
-//        send(new CommandOk("server ready"));
+        while(state != null) {
+            state.run();
+            state = stateFactory.nextState(state);
+        }
     }
 }

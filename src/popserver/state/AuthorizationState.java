@@ -2,16 +2,14 @@ package popserver.state;
 
 import poplib.command.CommandOk;
 import poplib.service.DeliveryService;
-import poplib.service.impl.DeliveryServiceImpl;
 import poplib.state.AbstractState;
 
 import java.io.IOException;
-import java.net.Socket;
 
 public class AuthorizationState extends AbstractState {
 
     public AuthorizationState(DeliveryService deliveryService) {
-        super(null);
+        super(deliveryService);
     }
 
     @Override
