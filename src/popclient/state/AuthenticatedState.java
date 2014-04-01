@@ -3,7 +3,6 @@ package popclient.state;
 import java.util.Scanner;
 
 import poplib.command.Command;
-import poplib.command.CommandQuit;
 import poplib.service.DeliveryService;
 import poplib.state.AbstractState;
 
@@ -30,7 +29,7 @@ public class AuthenticatedState extends AbstractState {
 			System.out.println(" --- --- --- ");
 			Scanner sc = new Scanner(System.in);
 			String response = sc.next();
-			
+			sc.close();
 			if("1".equals(response)) {
 				
 			}

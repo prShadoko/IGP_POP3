@@ -1,7 +1,6 @@
 package poplib.service.impl;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -13,22 +12,19 @@ import poplib.service.DeliveryService;
 
 public class DeliveryServiceImpl implements DeliveryService {
 
-	private Socket socket;
 	private BufferedReader reader;
-	private BufferedWriter writer;
+	private OutputStreamWriter writer;
 
 	protected CommandFactory commandFactory = new CommandFactory();
 
 	public DeliveryServiceImpl(Socket socket) throws IOException {
-		this.socket = socket;
-		reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        writer = new OutputStreamWriter(socket.getOutputStream());
 	}
 
 	@Override
 	public void send(Command command) throws IOException {
-		writer.write(command.toString());
+		writer.write(command.toString() + "\n");
 		writer.flush();
 	}
 

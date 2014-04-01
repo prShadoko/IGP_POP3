@@ -4,6 +4,11 @@ import poplib.command.Command;
 import poplib.state.StateException;
 
 public class AuthenticationException extends StateException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2995975554229057502L;
+
 	public AuthenticationException() {
 		super();
 	}

@@ -5,6 +5,11 @@ import poplib.state.StateException;
 
 public class ConnectionException extends StateException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4493380404757653042L;
+
 	public ConnectionException() {
 		super();
 	}

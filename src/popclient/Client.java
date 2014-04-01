@@ -1,16 +1,11 @@
 package popclient;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 
-import popclient.exception.ConnectionException;
 import popclient.factory.ClientStateFactory;
 import poplib.service.DeliveryService;
-import poplib.service.impl.DeliveryServiceImpl;
 import poplib.state.State;
-import poplib.state.StateException;
 
 public class Client {
 
@@ -30,7 +25,6 @@ public class Client {
 	
 	public void exec() {
 		State state = null;
-		StateException error = null;
 		
 		try {
 			state = init();

@@ -4,7 +4,12 @@ import poplib.command.Command;
 
 public class StateException extends Exception {
 
-    private Command command;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4329934170154908966L;
+	
+	private Command command;
 
     public StateException() {
     }
