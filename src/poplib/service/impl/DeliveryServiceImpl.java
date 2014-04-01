@@ -1,14 +1,11 @@
 package poplib.service.impl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.Socket;
-
 import poplib.command.Command;
 import poplib.factory.CommandFactory;
 import poplib.service.DeliveryService;
+
+import java.io.*;
+import java.net.Socket;
 
 public class DeliveryServiceImpl implements DeliveryService {
 
@@ -27,14 +24,29 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public void send(Command command) {
-		// TODO Auto-generated method stub
-		
+        try {
+            OutputStream oStream = socket.getOutputStream();
+            OutputStreamWriter writer = new OutputStreamWriter(oStream);
+            writer.write(command.toString());
+            writer.flush();
+        } catch(IOException e) {
+            //TODO
+            e.printStackTrace();
+        }
 	}
 	
 	@Override
 	public Command receive() {
-		// TODO Auto-generated method stub
-		return null;
+        try {
+            InputStream iStream = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(iStream));
+            return commandFactory.parse(reader.readLine());
+
+        } catch(IOException e) {
+            //TODO
+            e.printStackTrace();
+            return null;
+        }
 	}
 
 }
