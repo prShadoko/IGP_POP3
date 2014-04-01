@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import popclient.exception.AuthenticationException;
+import popclient.exception.ConnectionException;
 import poplib.command.Command;
 import poplib.command.CommandApop;
 import poplib.command.CommandErr;
@@ -25,27 +26,23 @@ public class AuthenticationState extends AbstractState {
 	OutputStream out;
 
 	CommandFactory commandFactory = new CommandFactory();
-	
+
 	@Override
 	public void run() {
-//		try {
-//			CommandApop apop = new CommandApop("p1207814", "");
-//
-//			out.write(apop.toString().getBytes());
-//			out.flush();
-//			
-//			Command command = commandFactory.parse(in.readLine());
-//			
-//			if(command instanceof CommandErr) {
-//				throw new AuthenticationException(((CommandErr) command).getMessage());
-//			}
-//			else if(command instanceof CommandOk) {
-//				System.out.println(((CommandOk) command).getMessage());
-//			}
-//			
-//		} catch (IOException e) {
-//			throw new AuthenticationException(e);
-//		}
+		CommandApop apop = new CommandApop("p1207814", "");
+
+		try {
+			deliveryService.send(apop);
+			Command response = deliveryService.receive();
+
+			if (response instanceof CommandOk) {
+				System.out.println(((CommandOk) response).getMessage());
+			} else if (response instanceof CommandErr) {
+				setError(new ConnectionException(new AuthenticationException(response)));
+			}
+		} catch (IOException e) {
+			setError(new ConnectionException(new AuthenticationException(e)));
+		}
 	}
 
 }

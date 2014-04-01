@@ -1,7 +1,8 @@
-package poplib.state;
+package popserver;
 
 import poplib.command.CommandOk;
 import poplib.service.impl.DeliveryServiceImpl;
+import poplib.state.AbstractState;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -14,6 +15,11 @@ public class AuthorizationState extends AbstractState {
 
     @Override
     public void run() {
-        deliveryService.send(new CommandOk("server ready"));
+        try {
+			deliveryService.send(new CommandOk("server ready"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

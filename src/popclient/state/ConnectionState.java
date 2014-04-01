@@ -39,7 +39,6 @@ public class ConnectionState extends AbstractState {
 			} else {
 				setError(new ConnectionException("Bad server response", command));
 			}
-			
 		} catch (IOException e) {
 			setError(new ConnectionException(e));
 		}
