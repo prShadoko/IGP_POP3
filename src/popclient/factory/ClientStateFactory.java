@@ -1,7 +1,11 @@
 package popclient.factory;
 
+import popclient.state.AuthenticatedState;
 import popclient.state.AuthenticationState;
 import popclient.state.ConnectionState;
+import poplib.command.Command;
+import poplib.command.CommandErr;
+import poplib.command.CommandQuit;
 import poplib.factory.StateFactory;
 import poplib.service.DeliveryService;
 import poplib.state.State;
@@ -24,6 +28,7 @@ public class ClientStateFactory implements StateFactory {
 		State next = null;
 		if(null == state) {
 			next = new ConnectionState();
+			
 		} else if(state instanceof ConnectionState) {
 			ConnectionState connectionState = (ConnectionState) state;
 			deliveryService = connectionState.getDeliveryService();
@@ -35,6 +40,33 @@ public class ClientStateFactory implements StateFactory {
 				error.printStackTrace();
 				next = connectionState.reset();
 			}
+			
+		} else if(state instanceof AuthenticationState) {
+			AuthenticationState authenticationState = (AuthenticationState) state;
+			StateException error = authenticationState.getError();
+			if(error != null) {
+				if(error.getCommand() instanceof CommandErr) {
+					next = state;
+				}
+				else {
+					next = null;
+				}
+			} else {
+				next = new AuthenticatedState(deliveryService);
+			}
+			
+		} else if(state instanceof AuthenticatedState) {
+			AuthenticatedState authenticatedState = (AuthenticatedState) state;
+			StateException error = authenticatedState.getError();
+			if(error != null) {
+				//TODO
+			} else {
+				Command cmd = authenticatedState.getCommandToSend();
+				if(cmd instanceof CommandQuit) {
+					
+				}
+			}
+			
 		}
 		
 		return next;
