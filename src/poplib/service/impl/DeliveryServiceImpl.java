@@ -9,21 +9,19 @@ import java.net.Socket;
 
 public class DeliveryServiceImpl implements DeliveryService {
 
-	private Socket socket;
 	private BufferedReader reader;
 	private OutputStreamWriter writer;
 
 	protected CommandFactory commandFactory = new CommandFactory();
 
 	public DeliveryServiceImpl(Socket socket) throws IOException {
-		this.socket = socket;
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer = new OutputStreamWriter(socket.getOutputStream());
 	}
 
 	@Override
 	public void send(Command command) throws IOException {
-		writer.write(command.toString());
+		writer.write(command.toString() + "\n");
 		writer.flush();
 	}
 
