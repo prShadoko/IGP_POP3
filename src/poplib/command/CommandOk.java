@@ -27,7 +27,7 @@ public class CommandOk extends Command {
 
 	@Override
 	public String toString() {
-		return super.toString() + " " + message;
+		return super.toString() + " " + message + " " + timestamp;
 	}
 
 	public String getMessage() {

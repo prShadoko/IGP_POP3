@@ -1,4 +1,4 @@
-package popserver;
+package popserver.factory;
 
 import poplib.factory.StateFactory;
 import poplib.state.State;
