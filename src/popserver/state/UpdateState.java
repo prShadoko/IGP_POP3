@@ -41,5 +41,4 @@ public class UpdateState extends AbstractState {
 			getError().printStackTrace();
 		}
 	}
-
 }

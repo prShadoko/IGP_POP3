@@ -17,4 +17,5 @@ public interface MailboxService {
     public int getMailSize();
 
     public int getMailCount();
+
 }
