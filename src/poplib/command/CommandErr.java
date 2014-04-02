@@ -6,9 +6,10 @@ public class CommandErr extends Command {
 	
 	private String message;
 
-	public CommandErr() {
-		super(COMMAND_NAME);
-	}
+	public CommandErr(String message) {
+        super(COMMAND_NAME);
+        this.message = message;
+    }
 
 	@Override
 	public String toString() {

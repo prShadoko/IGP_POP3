@@ -22,7 +22,12 @@ public class MailboxServiceImpl implements MailboxService {
 
     @Override
     public boolean checkAuthentication(CommandApop command, String timestamp) {
+        //TODO
         return true;
+    }
+
+    public void lock(String mailbox) {
+        //TODO
     }
 
     @Override
