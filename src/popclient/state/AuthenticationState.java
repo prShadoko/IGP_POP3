@@ -19,7 +19,8 @@ public class AuthenticationState extends AbstractState {
 	
 	@Override
 	public void run() {
-		CommandApop apop = new CommandApop("p1207814", "");
+		System.out.println("Authentication");
+		CommandApop apop = new CommandApop("mailbox", "md5");
 
 		try {
 			deliveryService.send(apop);

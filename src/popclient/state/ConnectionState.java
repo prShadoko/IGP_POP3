@@ -3,7 +3,6 @@ package popclient.state;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 import popclient.exception.ConnectionException;
 import poplib.Protocol;
@@ -12,7 +11,6 @@ import poplib.command.CommandOk;
 import poplib.service.DeliveryService;
 import poplib.service.impl.DeliveryServiceImpl;
 import poplib.state.AbstractState;
-import poplib.state.StateException;
 
 public class ConnectionState extends AbstractState {
 
@@ -29,9 +27,11 @@ public class ConnectionState extends AbstractState {
 		try {
 			socket = new Socket(InetAddress.getByName("192.168.43.130"), Protocol.LISTENING_PORT);
 //			socket = new Socket(InetAddress.getByName("accesbv.univ-lyon1.fr"), 995);
+			
 			deliveryService = new DeliveryServiceImpl(socket);
-			System.out.println("Waiting for server confirmation.");
+
 			Command command = deliveryService.receive();
+			System.out.println("Command received: " + command);
 
 			if (command instanceof CommandOk) {
 				CommandOk commandOk = (CommandOk) command;
