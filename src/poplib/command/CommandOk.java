@@ -11,7 +11,7 @@ public class CommandOk extends Command {
     }
 
     public CommandOk(String message) {
-        this();
+        super(COMMAND_NAME);
         this.message = message;
     }
 

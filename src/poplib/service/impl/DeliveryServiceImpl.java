@@ -12,26 +12,26 @@ import poplib.service.DeliveryService;
 
 public class DeliveryServiceImpl implements DeliveryService {
 
-	private BufferedReader reader;
-	private OutputStreamWriter writer;
+    private BufferedReader reader;
+    private OutputStreamWriter writer;
 
-	protected CommandFactory commandFactory = new CommandFactory();
+    protected CommandFactory commandFactory = new CommandFactory();
 
-	public DeliveryServiceImpl(Socket socket) throws IOException {
+    public DeliveryServiceImpl(Socket socket) throws IOException {
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer = new OutputStreamWriter(socket.getOutputStream());
-	}
+    }
 
-	@Override
-	public void send(Command command) throws IOException {
-		writer.write(command.toString() + "\n");
-		writer.flush();
-	}
+    @Override
+    public void send(Command command) throws IOException {
+        writer.write(command + "\n");
+        writer.flush();
+    }
 
-	@Override
-	public Command receive() throws IOException {
-		String line = reader.readLine();
-		Command command = commandFactory.parse(line);
-		return command;
-	}
+    @Override
+    public Command receive() throws IOException {
+        String line = reader.readLine();
+        Command command = commandFactory.parse(line);
+        return command;
+    }
 }

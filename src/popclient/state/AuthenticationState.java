@@ -13,27 +13,26 @@ import poplib.state.AbstractState;
 
 public class AuthenticationState extends AbstractState {
 
-	public AuthenticationState(DeliveryService deliveryService) {
-		super(deliveryService);
-	}
-	
-	@Override
-	public void run() {
-		System.out.println("Authentication");
-		CommandApop apop = new CommandApop("mailbox", "md5");
+    public AuthenticationState(DeliveryService deliveryService) {
+        super(deliveryService);
+    }
 
-		try {
-			deliveryService.send(apop);
-			Command response = deliveryService.receive();
+    @Override
+    public void run() {
+        System.out.println("Authentication");
+        CommandApop apop = new CommandApop("mailbox", "md5");
 
-			if (response instanceof CommandOk) {
-				System.out.println(((CommandOk) response).getMessage());
-			} else if (response instanceof CommandErr) {
-				setError(new ConnectionException(new AuthenticationException(response)));
-			}
-		} catch (IOException e) {
-			setError(new ConnectionException(new AuthenticationException(e)));
-		}
-	}
+        try {
+            deliveryService.send(apop);
+            Command response = deliveryService.receive();
 
+            if(response instanceof CommandOk) {
+                System.out.println(((CommandOk) response).getMessage());
+            } else if(response instanceof CommandErr) {
+                setError(new ConnectionException(new AuthenticationException(response)));
+            }
+        } catch(IOException e) {
+            setError(new AuthenticationException(e));
+        }
+    }
 }

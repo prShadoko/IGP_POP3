@@ -11,37 +11,36 @@ import poplib.state.StateException;
 
 public class SendingState extends AbstractState {
 
-	private Command command;
-	private Command response;
+    private Command command;
+    private Command response;
 
-	public SendingState(DeliveryService deliveryService) {
-		super(deliveryService);
-	}
+    public SendingState(DeliveryService deliveryService) {
+        super(deliveryService);
+    }
 
-	@Override
-	public void run() {
-		try {
-			deliveryService.send(command);
-			response = deliveryService.receive();
-			
-			if(response instanceof CommandErr) {
-				setError(new StateException(response));
-			} else if(response instanceof CommandOk) {
-				CommandOk ok = (CommandOk) response;
-				System.out.println(ok.getMessage());
-			}
-		} catch (IOException e) {
-			setError(new StateException(e));
-			getError().printStackTrace();
-		}
-	}
+    @Override
+    public void run() {
+        try {
+            deliveryService.send(command);
+            response = deliveryService.receive();
 
-	public void setCommand(Command command) {
-		this.command = command;
-	}
+            if(response instanceof CommandErr) {
+                setError(new StateException(response));
+            } else if(response instanceof CommandOk) {
+                CommandOk ok = (CommandOk) response;
+                System.out.println(ok);
+            }
+        } catch(IOException e) {
+            setError(new StateException(e));
+            getError().printStackTrace();
+        }
+    }
 
-	public Command getResponse() {
-		return response;
-	}
+    public void setCommand(Command command) {
+        this.command = command;
+    }
 
+    public Command getResponse() {
+        return response;
+    }
 }

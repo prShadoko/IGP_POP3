@@ -4,9 +4,17 @@ import poplib.command.CommandApop;
 
 public interface MailboxService {
 
+    public String stat();
+
+    public String retr(int id);
+
+    public String update();
+
     public String getTimestamp();
+
     public boolean checkAuthentication(CommandApop command, String timestamp);
-    public void lock(String mailbox);
-    public int getMailCount(String mailbox);
-    public int getMailSize(String mailbox);
+
+    public int getMailSize();
+
+    public int getMailCount();
 }

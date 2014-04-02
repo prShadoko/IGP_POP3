@@ -1,13 +1,29 @@
 package popserver.service.impl;
 
-import poplib.command.CommandApop;
-import popserver.service.MailboxService;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import poplib.command.CommandApop;
+import popserver.service.MailboxService;
+
 public class MailboxServiceImpl implements MailboxService {
 
+    @Override
+    public String stat() {
+        return "3 480";
+    }
+
+    @Override
+    public String retr(int id) {
+        return "Header\r\nHeader\r\nHeader\r\nHeaderMessage id: " + id + "\r\n.\r\n";
+    }
+
+    @Override
+    public String update() {
+        return null;
+    }
+
+    @Override
     public String getTimestamp() {
         String hostname;
         try {
@@ -22,21 +38,16 @@ public class MailboxServiceImpl implements MailboxService {
 
     @Override
     public boolean checkAuthentication(CommandApop command, String timestamp) {
-        //TODO
         return true;
     }
 
-    public void lock(String mailbox) {
-        //TODO
+    @Override
+    public int getMailCount() {
+        return 3;
     }
 
     @Override
-    public int getMailCount(String mailbox) {
-        return 0;
-    }
-
-    @Override
-    public int getMailSize(String mailbox) {
-        return 0;
+    public int getMailSize() {
+        return 480;
     }
 }

@@ -4,32 +4,33 @@ import poplib.command.Command;
 import poplib.state.StateException;
 
 public class AuthorizationException extends StateException {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 2995975554229057502L;
 
-	public AuthorizationException() {
-		super();
-	}
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2995975554229057502L;
 
-	public AuthorizationException(Command command) {
-		super(command);
-	}
+    public AuthorizationException() {
+        super();
+    }
 
-	public AuthorizationException(String message) {
-		super(message);
-	}
+    public AuthorizationException(Command command) {
+        super(command);
+    }
 
-	public AuthorizationException(String message, Command command) {
-		super(message, command);
-	}
+    public AuthorizationException(String message) {
+        super(message);
+    }
 
-	public AuthorizationException(Throwable throwable) {
-		super(throwable);
-	}
+    public AuthorizationException(String message, Command command) {
+        super(message, command);
+    }
 
-	public AuthorizationException(String message, Throwable throwable) {
-		super(message, throwable);
-	}
+    public AuthorizationException(Throwable throwable) {
+        super(throwable);
+    }
+
+    public AuthorizationException(String message, Throwable throwable) {
+        super(message, throwable);
+    }
 }

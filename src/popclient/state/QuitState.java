@@ -10,22 +10,23 @@ import poplib.state.StateException;
 
 public class QuitState extends AbstractState {
 
-	public QuitState(DeliveryService deliveryService) {
-		super(deliveryService);
-	}
+    public QuitState(DeliveryService deliveryService) {
+        super(deliveryService);
+    }
 
-	@Override
-	public void run() {
-		System.out.println("Quiting");
-		
-		try {
-			deliveryService.send(new CommandQuit());
-			Command response = deliveryService.receive();
-			System.out.println(response);
-		} catch (IOException e) {
-			setError(new StateException(e));
-			getError().printStackTrace();
-		}
-	}
+    @Override
+    public void run() {
+        System.out.println(" --- Quit State --- ");
 
+        try {
+            CommandQuit command = new CommandQuit();
+            System.out.println("send: " + command);
+            deliveryService.send(command);
+            Command response = deliveryService.receive();
+            System.out.println("Receive: " + response);
+        } catch(IOException e) {
+            setError(new StateException(e));
+            getError().printStackTrace();
+        }
+    }
 }

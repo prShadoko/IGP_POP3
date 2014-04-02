@@ -1,13 +1,16 @@
 package popserver.state;
 
-import poplib.command.*;
+import java.io.IOException;
+
+import poplib.command.Command;
+import poplib.command.CommandApop;
+import poplib.command.CommandErr;
+import poplib.command.CommandOk;
 import poplib.service.DeliveryService;
 import poplib.state.AbstractState;
 import popserver.exception.AuthorizationException;
 import popserver.service.MailboxService;
 import popserver.service.impl.MailboxServiceImpl;
-
-import java.io.IOException;
 
 public class AuthorizationState extends AbstractState {
 
@@ -19,37 +22,30 @@ public class AuthorizationState extends AbstractState {
 
     @Override
     public void run() {
+        System.out.println(" --- Authorization State --- ");
         try {
             String timestamp = mailboxService.getTimestamp();
-            Command commandGreeting = new CommandOk("server ready" + timestamp);
-            System.out.println("Command: " + commandGreeting.toString());
-            deliveryService.send(commandGreeting);
-            System.out.println("Sent");
-            Command commandRequest = deliveryService.receive();
-            if(commandRequest instanceof CommandApop) {
-                CommandApop commandApop = (CommandApop) commandRequest;
-                Command commandAnswer;
-                if(mailboxService.checkAuthentication(commandApop, timestamp)) {
-                    mailboxService.lock(commandApop.getMailbox());
-                    commandAnswer = new CommandOk("maildrop for " + commandApop.getMailbox() + " ready.");
+            Command command = new CommandOk("server ready" + timestamp);
+            System.out.println("Send: " + command.toString());
+            deliveryService.send(command);
+
+            command = deliveryService.receive();
+            System.out.println("Receive: " + command);
+            if(command instanceof CommandApop) {
+                CommandApop commandApop = (CommandApop) command;
+                if(mailboxService.checkAuthentication((CommandApop) command, timestamp)) {
+                    System.out.println("User authenticated.");
+                    command = new CommandOk("maildrop has " + mailboxService.getMailCount() + " message(s) (" + mailboxService.getMailSize() + ")");
                 } else {
-                    commandAnswer = new CommandErr("permission denied for " + commandApop.getMailbox() + " maildrop.");
-                    setError(new AuthorizationException(commandAnswer));
+                    command = new CommandErr("permission denied for " + commandApop.getMailbox() + " maildrop.");
+                    setError(new AuthorizationException(command));
                 }
-                deliveryService.send(commandAnswer);
-            } else if(commandRequest instanceof CommandQuit) {
-                CommandQuit commandQuit = (CommandQuit) commandRequest;
-                Command commandAnswer = new CommandOk("closing server connexion.");
-                deliveryService.send(commandAnswer);
-                setError(new AuthorizationException(commandQuit));
-            } else {
-                Command commandAnswer = new CommandErr("invalid request.");
-                deliveryService.send(commandAnswer);
-                setError(new AuthorizationException(commandAnswer));
             }
+            System.out.println("Send: " + command);
+            deliveryService.send(command);
         } catch(IOException e) {
-            //TODO
-            e.printStackTrace();
+            setError(new AuthorizationException(e));
+            getError().printStackTrace();
         }
     }
 }

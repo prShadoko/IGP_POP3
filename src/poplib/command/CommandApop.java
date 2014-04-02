@@ -2,8 +2,8 @@ package poplib.command;
 
 public class CommandApop extends Command {
 
-	public static final String COMMAND_NAME = "APOP";
-	
+    public static final String COMMAND_NAME = "APOP";
+
     private String mailbox;
     private String md5;
 
@@ -29,5 +29,9 @@ public class CommandApop extends Command {
     public CommandApop setMd5(String md5) {
         this.md5 = md5;
         return this;
+    }
+
+    public String toString() {
+        return super.toString() + " " + mailbox + " " + md5;
     }
 }
