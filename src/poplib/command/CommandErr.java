@@ -6,8 +6,12 @@ public class CommandErr extends Command {
 	
 	private String message;
 
-	public CommandErr(String message) {
+    public CommandErr() {
         super(COMMAND_NAME);
+    }
+
+	public CommandErr(String message) {
+        this();
         this.message = message;
     }
 
