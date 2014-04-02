@@ -11,7 +11,6 @@ import poplib.command.CommandStat;
 public class CommandFactory {
 
 	public Command parse(String cmd) {
-		System.out.println(cmd);
 		Command command = null;
 		String commandName;
 		String commandArg;
@@ -28,10 +27,12 @@ public class CommandFactory {
 			}
 
 			if (CommandApop.COMMAND_NAME.equals(commandName)) {
-				String[] args = commandArg.split(" ");
-
-				if (args.length == 2) {
-					command = new CommandApop(args[0], args[1]);
+				if(null != commandArg) {
+					String[] args = commandArg.split(" ");
+	
+					if (args.length == 2) {
+						command = new CommandApop(args[0], args[1]);
+					}
 				}
 			} else if (CommandOk.COMMAND_NAME.equals(commandName)) {
 				command = new CommandOk(commandArg);

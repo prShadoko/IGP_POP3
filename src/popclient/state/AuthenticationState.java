@@ -32,7 +32,7 @@ public class AuthenticationState extends AbstractState {
 				setError(new ConnectionException(new AuthenticationException(response)));
 			}
 		} catch (IOException e) {
-			setError(new ConnectionException(new AuthenticationException(e)));
+			setError(new AuthenticationException(e));
 		}
 	}
 

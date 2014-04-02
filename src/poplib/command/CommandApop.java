@@ -30,4 +30,8 @@ public class CommandApop extends Command {
         this.md5 = md5;
         return this;
     }
+    
+    public String toString() {
+		return super.toString() + " " + mailbox + " " + md5;
+    }
 }

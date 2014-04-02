@@ -28,7 +28,7 @@ public class SendingState extends AbstractState {
 				setError(new StateException(response));
 			} else if(response instanceof CommandOk) {
 				CommandOk ok = (CommandOk) response;
-				System.out.println(ok.getMessage());
+				System.out.println(ok);
 			}
 		} catch (IOException e) {
 			setError(new StateException(e));

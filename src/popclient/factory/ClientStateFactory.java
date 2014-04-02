@@ -74,7 +74,7 @@ public class ClientStateFactory implements StateFactory {
 			}
 			
 		} else if (state instanceof SendingState) {
-			if(null != state.getError()) {
+			if(null == state.getError()) {
 				next = new AuthenticatedState(deliveryService);
 			}
 			

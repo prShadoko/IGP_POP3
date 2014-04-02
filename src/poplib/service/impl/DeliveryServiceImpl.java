@@ -24,7 +24,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public void send(Command command) throws IOException {
-		writer.write(command.toString() + "\n");
+		writer.write(command + "\n");
 		writer.flush();
 	}
 

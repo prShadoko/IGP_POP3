@@ -6,6 +6,10 @@ public class CommandOk extends Command {
 
     private String message;
 
+	public CommandOk() {
+		super(COMMAND_NAME);
+	}
+	
     public CommandOk(String message) {
         super(COMMAND_NAME);
         this.message = message;
