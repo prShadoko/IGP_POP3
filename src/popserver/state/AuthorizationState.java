@@ -29,7 +29,7 @@ public class AuthorizationState extends AbstractState {
             System.out.println("Send: " + command.toString());
             deliveryService.send(command);
 
-            command = deliveryService.receive();
+            command = deliveryService.receiveCommand();
             System.out.println("Receive: " + command);
             if(command instanceof CommandApop) {
             	CommandApop commandApop = (CommandApop) command;

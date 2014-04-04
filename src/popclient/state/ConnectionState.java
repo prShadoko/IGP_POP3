@@ -30,7 +30,7 @@ public class ConnectionState extends AbstractState {
 			
 			deliveryService = new DeliveryServiceImpl(socket);
 
-			Command command = deliveryService.receive();
+			Command command = deliveryService.receiveCommand();
 			System.out.println("Command received: " + command);
 
 			if (command instanceof CommandOk) {

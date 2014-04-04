@@ -15,7 +15,7 @@ public class MailboxServiceImpl implements MailboxService{
 
 	@Override
 	public String retr(int id) {
-		return "Header\r\nHeader\r\nHeader\r\nHeaderMessage id: "+id+"\r\n.\r\n";
+		return "from: pierre.binauld@gmail.com<CR><LF>to: thomas.richard@gmail.com<CR><LF>Object: IGP POP3<CR><LF>Message id: "+id+"<CR><LF>\n.<CR><LF>";
 	}
 
 	@Override
