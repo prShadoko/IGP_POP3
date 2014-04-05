@@ -1,15 +1,13 @@
 package popclient;
 
+import popclient.factory.ClientStateFactory;
+import poplib.state.State;
+
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import popclient.factory.ClientStateFactory;
-import poplib.service.DeliveryService;
-import poplib.state.State;
-
 public class Client {
 
-    DeliveryService deliveryService;
     ClientStateFactory clientStateFactory;
 
     public Client() {
@@ -17,8 +15,6 @@ public class Client {
     }
 
     public State init() throws UnknownHostException, IOException {
-//		socket = new Socket(InetAddress.getByName("accesbv.univ-lyon1.fr"), 995);
-//		deliveryService = new DeliveryServiceImpl(socket);
         clientStateFactory = new ClientStateFactory();
         return clientStateFactory.nextState(null);
     }

@@ -1,9 +1,5 @@
 package popclient.state;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-
 import popclient.exception.ConnectionException;
 import poplib.Protocol;
 import poplib.command.Command;
@@ -11,6 +7,10 @@ import poplib.command.CommandOk;
 import poplib.service.DeliveryService;
 import poplib.service.impl.DeliveryServiceImpl;
 import poplib.state.AbstractState;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 
 public class ConnectionState extends AbstractState {
 
@@ -29,7 +29,7 @@ public class ConnectionState extends AbstractState {
 
             deliveryService = new DeliveryServiceImpl(socket);
 
-            Command command = deliveryService.receive();
+            Command command = deliveryService.receiveCommand();
             System.out.println("Command received: " + command);
 
             if(command instanceof CommandOk) {

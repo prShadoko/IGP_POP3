@@ -1,10 +1,6 @@
 package popclient.factory;
 
-import popclient.state.AuthenticatedState;
-import popclient.state.AuthenticationState;
-import popclient.state.ConnectionState;
-import popclient.state.QuitState;
-import popclient.state.SendingState;
+import popclient.state.*;
 import poplib.command.Command;
 import poplib.command.CommandErr;
 import poplib.factory.StateFactory;

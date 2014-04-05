@@ -1,12 +1,12 @@
 package popclient.state;
 
-import java.io.IOException;
-
 import poplib.command.Command;
 import poplib.command.CommandQuit;
 import poplib.service.DeliveryService;
 import poplib.state.AbstractState;
 import poplib.state.StateException;
+
+import java.io.IOException;
 
 public class QuitState extends AbstractState {
 
@@ -22,7 +22,7 @@ public class QuitState extends AbstractState {
             CommandQuit command = new CommandQuit();
             System.out.println("send: " + command);
             deliveryService.send(command);
-            Command response = deliveryService.receive();
+            Command response = deliveryService.receiveCommand();
             System.out.println("Receive: " + response);
         } catch(IOException e) {
             setError(new StateException(e));

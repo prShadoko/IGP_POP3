@@ -1,12 +1,6 @@
 package poplib.factory;
 
-import poplib.command.Command;
-import poplib.command.CommandApop;
-import poplib.command.CommandErr;
-import poplib.command.CommandOk;
-import poplib.command.CommandQuit;
-import poplib.command.CommandRetr;
-import poplib.command.CommandStat;
+import poplib.command.*;
 
 public class CommandFactory {
 
@@ -16,7 +10,6 @@ public class CommandFactory {
         String commandArg;
 
         if(null != cmd) {
-
             int firstSpacePosition = cmd.indexOf(' ');
             if(-1 == firstSpacePosition) {
                 commandName = cmd;

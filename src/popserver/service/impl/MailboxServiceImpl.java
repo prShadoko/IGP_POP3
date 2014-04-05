@@ -1,21 +1,21 @@
 package popserver.service.impl;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import poplib.command.CommandApop;
 import popserver.service.MailboxService;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class MailboxServiceImpl implements MailboxService {
 
     @Override
-    public String stat() {
+    public String statistics() {
         return "3 480";
     }
 
     @Override
-    public String retr(int id) {
-        return "Header\r\nHeader\r\nHeader\r\nHeaderMessage id: " + id + "\r\n.\r\n";
+    public String retrieve(int id) {
+        return "from: pierre.binauld@gmail.com<CR><LF>to: thomas.richard@gmail.com<CR><LF>Object: IGP POP3<CR><LF>Message id: " + id + "<CR><LF>\n.<CR><LF>";
     }
 
     @Override

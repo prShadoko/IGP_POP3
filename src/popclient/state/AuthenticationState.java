@@ -1,7 +1,5 @@
 package popclient.state;
 
-import java.io.IOException;
-
 import popclient.exception.AuthenticationException;
 import popclient.exception.ConnectionException;
 import poplib.command.Command;
@@ -10,6 +8,8 @@ import poplib.command.CommandErr;
 import poplib.command.CommandOk;
 import poplib.service.DeliveryService;
 import poplib.state.AbstractState;
+
+import java.io.IOException;
 
 public class AuthenticationState extends AbstractState {
 
@@ -24,7 +24,7 @@ public class AuthenticationState extends AbstractState {
 
         try {
             deliveryService.send(apop);
-            Command response = deliveryService.receive();
+            Command response = deliveryService.receiveCommand();
 
             if(response instanceof CommandOk) {
                 System.out.println(((CommandOk) response).getMessage());

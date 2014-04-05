@@ -4,9 +4,9 @@ import poplib.command.CommandApop;
 
 public interface MailboxService {
 
-    public String stat();
+    public String statistics();
 
-    public String retr(int id);
+    public String retrieve(int id);
 
     public String update();
 

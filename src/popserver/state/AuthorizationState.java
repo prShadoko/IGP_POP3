@@ -1,7 +1,5 @@
 package popserver.state;
 
-import java.io.IOException;
-
 import poplib.command.Command;
 import poplib.command.CommandApop;
 import poplib.command.CommandErr;
@@ -11,6 +9,8 @@ import poplib.state.AbstractState;
 import popserver.exception.AuthorizationException;
 import popserver.service.MailboxService;
 import popserver.service.impl.MailboxServiceImpl;
+
+import java.io.IOException;
 
 public class AuthorizationState extends AbstractState {
 
@@ -29,7 +29,7 @@ public class AuthorizationState extends AbstractState {
             System.out.println("Send: " + command.toString());
             deliveryService.send(command);
 
-            command = deliveryService.receive();
+            command = deliveryService.receiveCommand();
             System.out.println("Receive: " + command);
             if(command instanceof CommandApop) {
                 CommandApop commandApop = (CommandApop) command;

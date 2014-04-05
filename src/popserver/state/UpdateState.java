@@ -1,7 +1,5 @@
 package popserver.state;
 
-import java.io.IOException;
-
 import poplib.command.Command;
 import poplib.command.CommandErr;
 import poplib.command.CommandOk;
@@ -9,6 +7,8 @@ import poplib.service.DeliveryService;
 import poplib.state.AbstractState;
 import poplib.state.StateException;
 import popserver.service.MailboxService;
+
+import java.io.IOException;
 
 public class UpdateState extends AbstractState {
 

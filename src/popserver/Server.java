@@ -1,9 +1,9 @@
 package popserver;
 
+import poplib.Protocol;
+
 import java.io.IOException;
 import java.net.ServerSocket;
-
-import poplib.Protocol;
 
 public class Server {
 
@@ -12,6 +12,10 @@ public class Server {
 
     public Server(int sessionCount) {
         this.sessionCount = sessionCount;
+    }
+
+    public static void main(String[] args) {
+        new Server(5).run();
     }
 
     public void run() {
@@ -27,9 +31,5 @@ public class Server {
             e.printStackTrace();
         } finally {
         }
-    }
-
-    public static void main(String[] args) {
-        new Server(5).run();
     }
 }

@@ -1,13 +1,13 @@
 package popclient.state;
 
-import java.io.IOException;
-
 import poplib.command.Command;
 import poplib.command.CommandErr;
 import poplib.command.CommandOk;
 import poplib.service.DeliveryService;
 import poplib.state.AbstractState;
 import poplib.state.StateException;
+
+import java.io.IOException;
 
 public class SendingState extends AbstractState {
 
@@ -22,7 +22,7 @@ public class SendingState extends AbstractState {
     public void run() {
         try {
             deliveryService.send(command);
-            response = deliveryService.receive();
+            response = deliveryService.receiveCommand();
 
             if(response instanceof CommandErr) {
                 setError(new StateException(response));

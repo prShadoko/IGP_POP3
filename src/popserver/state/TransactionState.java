@@ -1,17 +1,12 @@
 package popserver.state;
 
-import java.io.IOException;
-
-import poplib.command.Command;
-import poplib.command.CommandErr;
-import poplib.command.CommandOk;
-import poplib.command.CommandQuit;
-import poplib.command.CommandRetr;
-import poplib.command.CommandStat;
+import poplib.command.*;
 import poplib.service.DeliveryService;
 import poplib.state.AbstractState;
 import poplib.state.StateException;
 import popserver.service.MailboxService;
+
+import java.io.IOException;
 
 public class TransactionState extends AbstractState {
 
@@ -30,16 +25,21 @@ public class TransactionState extends AbstractState {
     public void run() {
         System.out.println(" --- Transaction State --- ");
         try {
-            Command command = deliveryService.receive();
+            Command command = deliveryService.receiveCommand();
             String response = null;
 
             System.out.println("Receive: " + command);
             if(command instanceof CommandQuit) {
                 quit = true;
+            }
+
+            System.out.println("Receive: " + command);
+            if(command instanceof CommandQuit) {
+                quit = true;
             } else if(command instanceof CommandStat) {
-                response = mailboxService.stat();
+                response = mailboxService.statistics();
             } else if(command instanceof CommandRetr) {
-                response = mailboxService.retr(((CommandRetr) command).getIdMessage());
+                response = mailboxService.retrieve(((CommandRetr) command).getIdMessage());
             }
 
             if(!quit) {
