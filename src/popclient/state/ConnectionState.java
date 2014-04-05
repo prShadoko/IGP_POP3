@@ -26,7 +26,6 @@ public class ConnectionState extends AbstractState {
         Socket socket;
         try {
             socket = new Socket(InetAddress.getByName(Protocol.HOST_ADDRESS), Protocol.LISTENING_PORT);
-//			socket = new Socket(InetAddress.getByName("accesbv.univ-lyon1.fr"), 995);
 
             deliveryService = new DeliveryServiceImpl(socket);
 
