@@ -24,10 +24,10 @@ public class AuthenticationState extends AbstractState {
 
         try {
             deliveryService.send(apop);
-            Command response = deliveryService.receiveCommand();
+            Command response = deliveryService.receive();
 
             if(response instanceof CommandOk) {
-                System.out.println(((CommandOk) response).getMessage());
+                System.out.println(((CommandOk) response).getComment());
             } else if(response instanceof CommandErr) {
                 setError(new ConnectionException(new AuthenticationException(response)));
             }

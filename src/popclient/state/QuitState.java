@@ -22,7 +22,7 @@ public class QuitState extends AbstractState {
             CommandQuit command = new CommandQuit();
             System.out.println("send: " + command);
             deliveryService.send(command);
-            Command response = deliveryService.receiveCommand();
+            Command response = deliveryService.receive();
             System.out.println("Receive: " + response);
         } catch(IOException e) {
             setError(new StateException(e));

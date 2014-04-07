@@ -2,7 +2,7 @@ package poplib.command;
 
 public class Command {
 
-    private String command;
+    protected String command;
 
     public Command(String command) {
         this.command = command;

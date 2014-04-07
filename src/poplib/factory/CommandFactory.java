@@ -2,43 +2,71 @@ package poplib.factory;
 
 import poplib.command.*;
 
+import java.util.Scanner;
+
 public class CommandFactory {
 
-    public Command parse(String cmd) {
+    public Command parse(Readable input) {
         Command command = null;
         String commandName;
-        String commandArg;
-
-        if(null != cmd) {
-            int firstSpacePosition = cmd.indexOf(' ');
-            if(-1 == firstSpacePosition) {
-                commandName = cmd;
-                commandArg = null;
-            } else {
-                commandName = cmd.substring(0, firstSpacePosition);
-                commandArg = cmd.substring(firstSpacePosition + 1);
-            }
-
+        Scanner scanner = new Scanner(input);
+        if(scanner.hasNext()) {
+            commandName = scanner.next();
             if(CommandApop.COMMAND_NAME.equals(commandName)) {
-                if(null != commandArg) {
-                    String[] args = commandArg.split(" ");
-
-                    if(args.length == 2) {
-                        command = new CommandApop(args[0], args[1]);
+                if(scanner.hasNext()) {
+                    String mailbox = scanner.next();
+                    if(scanner.hasNext()) {
+                        String md5 = scanner.next();
+                        command = new CommandApop(mailbox, md5);
+                    } else {
+//                        TODO throw exception
                     }
+                } else {
+//                    TODO throw exception
                 }
+
             } else if(CommandOk.COMMAND_NAME.equals(commandName)) {
-                command = new CommandOk(commandArg);
+                String comment = "";
+                if(scanner.hasNextInt()) {
+                    int mailCount = scanner.nextInt();
+                    int mailboxSize;
+                    if(scanner.hasNextInt()) {
+                        mailboxSize = scanner.nextInt();
+                        command = new CommandOkStat(mailCount, mailboxSize);
+                    } else {
+                        comment = Integer.toString(mailCount);
+                        if(scanner.hasNextLine()) {
+                            comment += scanner.nextLine();
+                        }
+                        command = new CommandOk(comment);
+                    }
+                } else {
+                    String mail = "";
+                    if(scanner.hasNextLine()) {
+                        comment += scanner.nextLine().trim();
+                    }
+                    while(scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        if(!line.equals(".")) {
+                            mail += line + "\n";
+                        }
+                    }
+                    command = new CommandOkRetr(mail, comment);
+                }
             } else if(CommandErr.COMMAND_NAME.equals(commandName)) {
-                command = new CommandErr();
+                if(scanner.hasNextLine()) {
+                    command = new CommandErr(scanner.nextLine());
+                } else {
+                    command = new CommandErr();
+                }
             } else if(CommandQuit.COMMAND_NAME.equals(commandName)) {
                 command = new CommandQuit();
             } else if(CommandRetr.COMMAND_NAME.equals(commandName)) {
-                try {
-                    int messageId = Integer.parseInt(commandArg);
+                if(scanner.hasNextInt()) {
+                    int messageId = scanner.nextInt();
                     command = new CommandRetr(messageId);
-                } catch(NumberFormatException e) {
-
+                } else {
+//                    TODO: throw exception
                 }
             } else if(CommandStat.COMMAND_NAME.equals(commandName)) {
                 command = new CommandStat();

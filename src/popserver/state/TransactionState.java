@@ -25,7 +25,7 @@ public class TransactionState extends AbstractState {
     public void run() {
         System.out.println(" --- Transaction State --- ");
         try {
-            Command command = deliveryService.receiveCommand();
+            Command command = deliveryService.receive();
             String response = null;
 
             System.out.println("Receive: " + command);

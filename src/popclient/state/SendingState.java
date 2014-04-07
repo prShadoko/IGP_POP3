@@ -22,7 +22,7 @@ public class SendingState extends AbstractState {
     public void run() {
         try {
             deliveryService.send(command);
-            response = deliveryService.receiveCommand();
+            response = deliveryService.receive();
 
             if(response instanceof CommandErr) {
                 setError(new StateException(response));

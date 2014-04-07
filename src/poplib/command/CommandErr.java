@@ -4,28 +4,28 @@ public class CommandErr extends Command {
 
     public static final String COMMAND_NAME = "ERR";
 
-    private String message;
+    private String comment;
 
     public CommandErr() {
-        super(COMMAND_NAME);
+        this("");
     }
 
-    public CommandErr(String message) {
+    public CommandErr(String comment) {
         super(COMMAND_NAME);
-        this.message = message;
+        this.comment = comment;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " " + message;
+        return super.toString() + " " + comment;
     }
 
-    public String getMessage() {
-        return message;
+    public String getComment() {
+        return comment;
     }
 
-    public CommandErr setMessage(String message) {
-        this.message = message;
+    public CommandErr setComment(String comment) {
+        this.comment = comment;
         return this;
     }
 }

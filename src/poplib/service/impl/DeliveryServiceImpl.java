@@ -23,35 +23,13 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public void send(Command command) throws IOException {
-        writer.write(command + "\n");
-        writer.write("-STOP" + "\n");
+        writer.write(command.toString());
         writer.flush();
     }
 
-    /*
     @Override
     public Command receive() throws IOException {
-        String line = reader.readLine();
-        Command command = commandFactory.parse(line);
-        return command;
-    }
-    //*/
-    @Override
-    public String receive() throws IOException {
-        String line = "";
-        String response = "";
-
-        while(!"-STOP\n".equals(line)) {
-            response += line;
-            line = reader.readLine() + "\n";
-        }
-
-        return response;
-    }
-
-    @Override
-    public Command receiveCommand() throws IOException {
-        Command command = commandFactory.parse(receive());
+        Command command = commandFactory.parse(reader);
         return command;
     }
 }

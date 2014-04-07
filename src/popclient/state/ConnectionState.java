@@ -29,12 +29,12 @@ public class ConnectionState extends AbstractState {
 
             deliveryService = new DeliveryServiceImpl(socket);
 
-            Command command = deliveryService.receiveCommand();
+            Command command = deliveryService.receive();
             System.out.println("Command received: " + command);
 
             if(command instanceof CommandOk) {
                 CommandOk commandOk = (CommandOk) command;
-                System.out.println(commandOk.getMessage());
+                System.out.println(commandOk.getComment());
             } else {
                 setError(new ConnectionException("Bad server response", command));
             }
