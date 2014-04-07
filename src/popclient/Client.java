@@ -39,7 +39,7 @@ public class Client {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("exit");
+		System.out.println("--- Terminated ---");
 	}
 	
 	public static void main(String[] args) {

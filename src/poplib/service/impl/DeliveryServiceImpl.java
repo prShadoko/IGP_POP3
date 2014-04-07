@@ -24,8 +24,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public void send(Command command) throws IOException {
+		System.out.println("    Send: " + command);
 		writer.write(command + "\n");
-		writer.write("-STOP" + "\n");
+		writer.write("\n");
 		writer.flush();
 	}
 
@@ -34,17 +35,20 @@ public class DeliveryServiceImpl implements DeliveryService {
 		String line = "";
 		String response = "";
 		
-		while(!"-STOP\n".equals(line)) {
-			response += line;
-			line = reader.readLine() + "\n";
-		}
+		line = reader.readLine();
 		
+		while(!"".equals(line)) {
+			response += line + "\n";
+			line = reader.readLine();
+		}
+
 		return response;
 	}
 	
 	@Override
 	public Command receiveCommand() throws IOException {
 		Command command = commandFactory.parse(receive());
+		System.out.println("Received: " + command);
 		return command;
 	}
 }

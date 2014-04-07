@@ -19,7 +19,7 @@ public class AuthenticationState extends AbstractState {
 	
 	@Override
 	public void run() {
-		System.out.println("Authentication");
+		System.out.println(" --- Authentication --- ");
 		CommandApop apop = new CommandApop("mailbox", "md5");
 
 		try {
@@ -27,7 +27,7 @@ public class AuthenticationState extends AbstractState {
 			Command response = deliveryService.receiveCommand();
 
 			if (response instanceof CommandOk) {
-				System.out.println(((CommandOk) response).getMessage());
+				System.out.println("Message:" + ((CommandOk) response).getMessage());
 			} else if (response instanceof CommandErr) {
 				setError(new ConnectionException(new AuthenticationException(response)));
 			}

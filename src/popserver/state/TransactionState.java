@@ -33,7 +33,6 @@ public class TransactionState extends AbstractState {
 			Command command = deliveryService.receiveCommand();
 			String response = null;
 			
-			System.out.println("Receive: " + command);
 			if (command instanceof CommandQuit) {
 				quit = true;
 
@@ -51,7 +50,6 @@ public class TransactionState extends AbstractState {
 				} else {
 					commandToSent = new CommandOk(response);
 				}
-				System.out.println("Send: " + commandToSent);
 				deliveryService.send(commandToSent);
 			}
 		} catch (IOException e) {

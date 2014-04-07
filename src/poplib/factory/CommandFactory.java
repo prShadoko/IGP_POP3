@@ -19,6 +19,7 @@ public class CommandFactory {
 
 			int firstSpacePosition = cmd.indexOf(' ');
 			if (-1 == firstSpacePosition) {
+				cmd = cmd.replace("\n", "");
 				commandName = cmd;
 				commandArg = null;
 			} else {
@@ -42,6 +43,7 @@ public class CommandFactory {
 				command = new CommandQuit();
 			} else if (CommandRetr.COMMAND_NAME.equals(commandName)) {
 				try {
+					commandArg = commandArg.replace("\n", "");
 					int messageId = Integer.parseInt(commandArg);
 					command = new CommandRetr(messageId);
 

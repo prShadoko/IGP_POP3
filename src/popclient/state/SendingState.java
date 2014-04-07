@@ -20,15 +20,16 @@ public class SendingState extends AbstractState {
 
 	@Override
 	public void run() {
+		System.out.println(" --- Sending --- ");
 		try {
 			deliveryService.send(command);
 			response = deliveryService.receiveCommand();
 			
 			if(response instanceof CommandErr) {
 				setError(new StateException(response));
+				getError().printStackTrace();
 			} else if(response instanceof CommandOk) {
 				CommandOk ok = (CommandOk) response;
-				System.out.println(ok);
 			}
 		} catch (IOException e) {
 			setError(new StateException(e));

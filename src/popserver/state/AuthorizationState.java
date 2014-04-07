@@ -26,11 +26,9 @@ public class AuthorizationState extends AbstractState {
         try {
             String timestamp = mailboxService.getTimestamp();
             Command command = new CommandOk("server ready" + timestamp);
-            System.out.println("Send: " + command.toString());
             deliveryService.send(command);
 
             command = deliveryService.receiveCommand();
-            System.out.println("Receive: " + command);
             if(command instanceof CommandApop) {
             	CommandApop commandApop = (CommandApop) command;
                 if(mailboxService.checkAuthentication((CommandApop) command, timestamp)) {
@@ -41,7 +39,6 @@ public class AuthorizationState extends AbstractState {
                     setError(new AuthorizationException(command));
                 }
             }
-            System.out.println("Send: "+command);
             deliveryService.send(command);
         } catch(IOException e) {
         	setError(new AuthorizationException(e));
