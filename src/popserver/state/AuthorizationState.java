@@ -1,7 +1,5 @@
 package popserver.state;
 
-import java.io.IOException;
-
 import poplib.command.Command;
 import poplib.command.CommandApop;
 import poplib.command.CommandErr;
@@ -11,6 +9,8 @@ import poplib.state.AbstractState;
 import popserver.exception.AuthorizationException;
 import popserver.service.MailboxService;
 import popserver.service.impl.MailboxServiceImpl;
+
+import java.io.IOException;
 
 public class AuthorizationState extends AbstractState {
 
@@ -22,17 +22,16 @@ public class AuthorizationState extends AbstractState {
 
     @Override
     public void run() {
-    	System.out.println(" --- Authorization State --- ");
+        System.out.println(" --- Authorization State --- ");
         try {
             String timestamp = mailboxService.getTimestamp();
             Command command = new CommandOk("server ready" + timestamp);
             deliveryService.send(command);
-
-            command = deliveryService.receiveCommand();
+            command = deliveryService.receive();
             if(command instanceof CommandApop) {
-            	CommandApop commandApop = (CommandApop) command;
+                CommandApop commandApop = (CommandApop) command;
                 if(mailboxService.checkAuthentication((CommandApop) command, timestamp)) {
-                	System.out.println("User authenticated.");
+                    System.out.println("User authenticated.");
                     command = new CommandOk("maildrop has " + mailboxService.getMailCount() + " message(s) (" + mailboxService.getMailSize() + ")");
                 } else {
                     command = new CommandErr("permission denied for " + commandApop.getMailbox() + " maildrop.");
@@ -41,9 +40,8 @@ public class AuthorizationState extends AbstractState {
             }
             deliveryService.send(command);
         } catch(IOException e) {
-        	setError(new AuthorizationException(e));
+            setError(new AuthorizationException(e));
             getError().printStackTrace();
-
         }
     }
 }

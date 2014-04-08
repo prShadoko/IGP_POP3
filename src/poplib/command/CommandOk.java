@@ -4,28 +4,28 @@ public class CommandOk extends Command {
 
     public static final String COMMAND_NAME = "+OK";
 
-    private String message;
+    protected String comment;
 
-	public CommandOk() {
-		super(COMMAND_NAME);
-	}
-	
-    public CommandOk(String message) {
+    public CommandOk() {
         super(COMMAND_NAME);
-        this.message = message;
+    }
+
+    public CommandOk(String comment) {
+        super(COMMAND_NAME);
+        this.comment = comment;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " " + message;
+        return super.toString() + " " + comment;
     }
 
-    public String getMessage() {
-        return message;
+    public String getComment() {
+        return comment;
     }
 
-    public CommandOk setMessage(String message) {
-        this.message = message;
+    public CommandOk setComment(String comment) {
+        this.comment = comment;
         return this;
     }
 }

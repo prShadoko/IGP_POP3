@@ -1,6 +1,5 @@
 package popclient.state;
 
-import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -57,8 +56,8 @@ public class AuthenticatedState extends AbstractState {
 	public Command getCommandToSend() {
 		return commandToSend;
 	}
-
-	public boolean quit() {
-		return quit;
-	}
+	
+    public boolean quit() {
+        return quit;
+    }
 }

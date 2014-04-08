@@ -2,30 +2,30 @@ package poplib.command;
 
 public class CommandErr extends Command {
 
-	public static final String COMMAND_NAME = "ERR";
-	
-	private String message;
+    public static final String COMMAND_NAME = "ERR";
 
-	public CommandErr() {
-		super(COMMAND_NAME);
-	}
-	
-	public CommandErr(String message) {
-		super(COMMAND_NAME);
-		this.message = message;
-	}
+    private String comment;
 
-	@Override
-	public String toString() {
-		return super.toString() + " " + message;
-	}
+    public CommandErr() {
+        this("");
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public CommandErr(String comment) {
+        super(COMMAND_NAME);
+        this.comment = comment;
+    }
 
-	public CommandErr setMessage(String message) {
-		this.message = message;
+    @Override
+    public String toString() {
+        return super.toString() + " " + comment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public CommandErr setComment(String comment) {
+        this.comment = comment;
         return this;
-	}
+    }
 }

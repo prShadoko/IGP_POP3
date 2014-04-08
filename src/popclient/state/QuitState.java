@@ -17,15 +17,14 @@ public class QuitState extends AbstractState {
 	@Override
 	public void run() {
 		System.out.println(" --- Quit --- ");
-		
+
 		try {
 			CommandQuit command = new CommandQuit();
 			deliveryService.send(command);
-			Command response = deliveryService.receiveCommand();
+			Command response = deliveryService.receive();
 		} catch (IOException e) {
 			setError(new StateException(e));
 			getError().printStackTrace();
 		}
 	}
-
 }

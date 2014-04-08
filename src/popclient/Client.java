@@ -17,8 +17,6 @@ public class Client {
 	}
 	
 	public State init() throws UnknownHostException, IOException {
-//		socket = new Socket(InetAddress.getByName("accesbv.univ-lyon1.fr"), 995);
-//		deliveryService = new DeliveryServiceImpl(socket);
 		clientStateFactory = new ClientStateFactory();
 		return clientStateFactory.nextState(null);
 	}
