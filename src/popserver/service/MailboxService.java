@@ -6,7 +6,7 @@ public interface MailboxService {
 
     public String statistics();
 
-    public String retrieve(int id);
+	public String retrieve(int id) throws IndexOutOfBoundsException;
 
     public String update();
 

@@ -20,7 +20,7 @@ public class SendingState extends AbstractState {
 
     @Override
     public void run() {
-    	System.out.println(" --- Sending State ---");
+    	System.out.println(" --- Sending State --- ");
         try {
             deliveryService.send(command);
             response = deliveryService.receive();

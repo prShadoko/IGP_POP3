@@ -27,6 +27,7 @@ public class TransactionState extends AbstractState {
         try {
             Command command = deliveryService.receive();
             String response = null;
+            String error = null;
 
             if(command instanceof CommandQuit) {
                 quit = true;
@@ -37,7 +38,11 @@ public class TransactionState extends AbstractState {
             } else if(command instanceof CommandStat) {
                 response = mailboxService.statistics();
             } else if(command instanceof CommandRetr) {
-                response = mailboxService.retrieve(((CommandRetr) command).getIdMessage());
+            	try {
+            		response = mailboxService.retrieve(((CommandRetr) command).getIdMessage());
+            	} catch (IndexOutOfBoundsException e) {
+            		error = "";
+            	}
             }
 
 			if (!quit) {

@@ -15,7 +15,7 @@ public class CommandOkRetr extends CommandOk {
 
     @Override
     public String toString() {
-        return super.toString() + "\n" + comment;
+        return super.toString() + mail;
     }
 
     public String getMail() {

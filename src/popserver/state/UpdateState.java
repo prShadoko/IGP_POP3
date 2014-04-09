@@ -33,7 +33,6 @@ public class UpdateState extends AbstractState {
         }
 
         try {
-            System.out.println("Send: " + command);
             deliveryService.send(command);
         } catch(IOException e) {
             setError(new StateException(e));

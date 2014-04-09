@@ -15,6 +15,9 @@ public class MailboxServiceImpl implements MailboxService{
 
 	@Override
 	public String retrieve(int id) {
+		if(id > 2) {
+			throw new IndexOutOfBoundsException();
+		}
 		return id + " 120\n" +
 				"from: pierre.binauld@gmail.com\r\n" +
 				"to: thomas.richard@gmail.com\r\n" +
